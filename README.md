@@ -149,6 +149,6 @@ The React application will start on http://localhost:3000 and connect to the R P
 - Deploy to production with proper security measures
 
 ## References
- - [SOCR](https://socr.umich.edu)
+ - [SOCR](https://socr.umich.edu) and [SOCR HTML5 Webapps](https://socr.umich.edu/HTML5/)
  - [GrayRain](https://gray-rain.com)
 
