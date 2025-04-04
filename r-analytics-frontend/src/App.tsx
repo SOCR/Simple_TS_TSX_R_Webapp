@@ -1,10 +1,12 @@
 // src/App.tsx
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import DataGenerator from './components/DataGenerator';
-import AnalysisResults from './components/AnalysisResults';
-import { analyzeData } from './services/api';
+import DataGenerator from './components/DataGenerator.tsx';
+import AnalysisResults from './components/AnalysisResults.tsx';
+import { analyzeData } from './services/api.ts';
 import { AnalysisResults as AnalysisResultsType, DataSet } from './types/types';
+import DatasetManager from './components/DatasetManager.tsx';
+import DatasetUploader from './components/DatasetUploader';
 
 const AppContainer = styled.div`
   max-width: 1200px;
@@ -52,6 +54,7 @@ const ErrorMessage = styled.div`
 
 function App() {
   const [analysisResults, setAnalysisResults] = useState<AnalysisResultsType | null>(null);
+  const [selectedDataset, setSelectedDataset] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -70,12 +73,21 @@ function App() {
     }
   };
 
+
+  const handleDatasetSelect = (dataInfo: any) => {
+    setSelectedDataset(dataInfo);
+    // Reset plots when a new dataset is selected
+    setAnalysisResults(null);
+  };
+
   return (
     <AppContainer>
       <Header>
         <Title>R Analytics in React</Title>
         <Subtitle>Connecting TypeScript/React with R Plumber API</Subtitle>
       </Header>
+
+      <DatasetManager onSelectDataset={handleDatasetSelect} />
 
       <DataGenerator onDataGenerated={handleDataGenerated} isLoading={loading} />
       

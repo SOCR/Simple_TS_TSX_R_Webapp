@@ -2,9 +2,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AnalysisResults } from '../types/types';
-import SummaryStats from './SummaryStats';
-import ModelResults from './ModelResults';
-import PlotDisplay from './PlotDisplay';
+import SummaryStats from './SummaryStats.tsx';
+import ModelResults from './ModelResults.tsx';
+import PlotDisplay from './PlotDisplay.tsx';
 
 const Container = styled.div`
   background-color: #fff;

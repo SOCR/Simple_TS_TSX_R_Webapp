@@ -1,0 +1,6 @@
+.RData
+.RHistory
+uploads/*.csv
+*.Rproj.user
+r-analytics-frontend/node_modules
+r-analytics-frontend/package-lock.json
