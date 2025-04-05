@@ -168,6 +168,7 @@ The project uses environment variables for configuration. An example file `.env.
 ## Example Applications
 
 ### 1. Python Calculator
+![image](https://github.com/user-attachments/assets/61a79952-b9fd-4b95-ac32-648af869f06e)
 
 - **Frontend Route**: `/python-calculator`    (i.e `http://localhost:5173/python-calculator`)
 - **Description**: Performs basic arithmetic operations using a Python backend
@@ -176,12 +177,17 @@ The project uses environment variables for configuration. An example file `.env.
 
 ### 2. R Statistics Calculator
 
+![image](https://github.com/user-attachments/assets/a48d8ad4-b796-4bdc-a8a5-a85a68bd9528)
+
+
 - **Frontend Route**: `/r-stats` (i.e `http://localhost:5173/r-stats`)
 - **Description**: Calculates statistics for a list of numbers using an R backend
 - **Requirements**: R backend must be running on port 8080
 - **Usage**: Enter a comma-separated list of numbers to calculate statistics
 
 ### 3. OpenAI Chat
+
+![image](https://github.com/user-attachments/assets/79a10307-401b-441b-b7f6-d50473071d1d)
 
 - **Frontend Route**: `/chat` (i.e `http://localhost:5173/chat`)
 - **Description**: Simple chat interface using OpenAI's API
