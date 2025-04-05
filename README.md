@@ -202,6 +202,7 @@ The project uses environment variables for configuration. An example file `.env.
 
 ## Project Structure
 
+```
 ├── frontend/ # React frontend application
 | |.env.example # Example environment variables
 │ ├── src/
@@ -211,6 +212,7 @@ The project uses environment variables for configuration. An example file `.env.
 │ ├── python/ # Python FastAPI calculator backend
 │ └── R/ # R Plumber statistics backend
 └── README.md # Project documentation
+```
 
 
 
