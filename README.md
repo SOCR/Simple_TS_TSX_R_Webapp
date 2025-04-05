@@ -24,7 +24,37 @@ The R backend provides a statistics API that calculates various metrics (mean, m
 
 ### Prerequisites
 
-- Node.js and npm for the frontend
+#### Node.js and npm
+
+You'll need Node.js (v14 or newer) and npm installed:
+
+- **Windows/macOS**:
+  1. Download the installer from [Node.js official website](https://nodejs.org/)
+  2. Run the installer and follow the installation wizard
+  3. Verify installation by running:
+     ```bash
+     node --version
+     npm --version
+     ```
+
+- **Linux (Ubuntu/Debian)**:
+  ```bash
+  curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+  sudo apt-get install -y nodejs
+  ```
+
+- **Using NVM (Node Version Manager, recommended for developers)**:
+  ```bash
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  nvm install 16
+  nvm use 16
+  ```
+
+#### Other Requirements
+
+- Python 3.8+ for the Python backend
+- R for the R backend
+- OpenAI API key for the chat example
 - Python 3.8+ for the Python backend
 - R for the R backend
 - OpenAI API key for the chat example
