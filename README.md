@@ -1,154 +1,180 @@
-# GrayRain/SOCR R-Webapp Demo using R-Plumber & React Integration
+# Multi-Backend Demo: React + Python + R Integration
 
-This project demonstrates how to connect a `React` `TypeScript` frontend with an `R` 
-backend using `Plumber API`. The application allows users to generate random data
-in the frontend, send it to `R` for analysis, and display the results returned from `R`.
+This project demonstrates how to build a React frontend application that communicates with multiple backend services written in Python and R. It includes three examples:
+
+1. **Python Calculator**: A simple calculator using FastAPI (Python)
+2. **R Statistics Calculator**: A statistics analyzer using Plumber API (R)
+3. **OpenAI Chat**: A chat interface that connects to OpenAI's API
 
 ## Implementation Overview
 
-### R Plumber API (Backend)
+### Frontend (React + TypeScript + Vite)
 
-The `R` backend provides a REST API endpoint `/analyze` that:
-1. Receives JSON data containing x and y values from the React frontend
-2. Calculates summary statistics (means, medians, standard deviations, correlation)
-3. Fits a linear regression model to the data
-4. Generates three interactive Plotly visualizations:
-   - Scatter plot with regression line
-   - Histogram of residuals
-   - Q-Q plot for residual normality assessment
-5. Returns all results as a structured JSON object
+The frontend is built with React, TypeScript, and Vite, using Tailwind CSS for styling. It communicates with the backend services through HTTP requests.
 
-### React/TypeScript Frontend
+### Python Backend (FastAPI)
 
-The React frontend consists of several components:
+The Python backend provides a simple calculator API with endpoints for basic arithmetic operations (addition, subtraction, multiplication, division).
 
-1. **DataGenerator**: Allows users to:
-   - Specify sample size, correlation strength, and noise level
-   - Generate random correlated data
-   - Send the data to R for analysis
+### R Backend (Plumber)
 
-2. **SummaryStats**: Displays basic statistical measures returned from R
-   - Color-codes correlation values based on strength
+The R backend provides a statistics API that calculates various metrics (mean, median, mode, etc.) for a list of numbers.
 
-3. **ModelResults**: Shows linear regression results
-   - Displays the model equation
-   - Presents model statistics in a formatted table
-   - Indicates statistical significance with appropriate markers
+## Project Setup
 
-4. **PlotDisplay**: Renders the three Plotly visualizations returned from R
-   - Converts R Plotly objects to JavaScript Plotly format
-   - Displays interactive graphs with hover information
+### Prerequisites
 
-5. **AnalysisResults**: Combines all result components into a unified display
+- Node.js and npm for the frontend
+- Python 3.8+ for the Python backend
+- R for the R backend
+- OpenAI API key for the chat example
 
-### How It Works
+### Environment Variables
 
-1. The user creates simulated data with the DataGenerator component
-2. When "Analyze with R" is clicked, the data is sent to the R Plumber API
-3. R processes the data and returns analysis results
-4. The React application renders the results in an elegant, interactive interface
+The project uses environment variables for configuration. An example file `.env.example` is provided.
 
-### Development and Deployment Notes
+1. Copy the example file:
+   ```bash
+   cp .env.example .env
+   ```
 
-- Both systems are completely separate but connected via REST API
-- The R backend can be deployed on any server that supports R
-- The React frontend can be deployed on standard web hosting
-- CORS is enabled in the R API to allow cross-origin requests during development
+2. Edit the `.env` file and add your OpenAI API key:
+   ```
+   VITE_OPENAI_API_KEY=your-openai-api-key
+   ```
 
-This implementation demonstrates the strategy of using R-Plumber API as a backend 
-for a React application, leveraging the strengths of both ecosystems: `R`'s statistical
-capabilities and React's interactive UI features.
+## Running the Project
+
+### Frontend
+
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+   The React application will start on http://localhost:5173
+
+### Python Backend (For example 1)
+
+#### Method 1: Using Anaconda (Recommended)
+
+1. Create and activate a conda environment:
+   ```bash
+   conda create -n calculator-api python=3.10
+   conda activate calculator-api
+   ```
+
+2. Install dependencies:
+   ```bash
+   cd backend/python
+   pip install -r requirements.txt
+   ```
+
+3. Start the FastAPI server:
+   ```bash
+   uvicorn calc_backend_api_endpoint:app --reload --port 8000
+   ```
+
+#### Method 2: Using pip directly
+
+1. Create and activate a virtual environment:
+   ```bash
+   cd backend/python
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Start the FastAPI server:
+   ```bash
+   uvicorn calc_backend_api_endpoint:app --reload --port 8000
+   ```
+
+### R Backend (For example 2)
+
+#### Method 1: Using RStudio (Recommended)
+
+1. Open RStudio and install required packages:
+   ```r
+   install.packages(c("plumber", "jsonlite"))
+   ```
+
+2. Open the `backend/R/stats_backend_api_endpoint.R` file in RStudio
+
+3. Run the Plumber API server:
+   ```r
+   plumber::plumb("stats_backend_api_endpoint.R")$run(port=8080)
+   ```
+
+#### Method 2: Using R directly 
+
+1. Install R from [CRAN](https://cran.r-project.org/)
+
+2. Install required packages:
+   ```r
+   install.packages(c("plumber", "jsonlite"))
+   ```
+
+3. Start the Plumber API server:
+   ```bash
+   cd backend/R
+   Rscript -e "library(plumber); pr <- plumb('stats_backend_api_endpoint.R'); pr$run(port=8080)"
+   ```
+
+## Example Applications
+
+### 1. Python Calculator
+
+- **Frontend Route**: `/python-calculator`    (i.e `http://localhost:5173/python-calculator`)
+- **Description**: Performs basic arithmetic operations using a Python backend
+- **Requirements**: Python backend must be running on port 8000
+- **Usage**: Enter two numbers and select an operation to calculate the result
+
+### 2. R Statistics Calculator
+
+- **Frontend Route**: `/r-stats` (i.e `http://localhost:5173/r-stats`)
+- **Description**: Calculates statistics for a list of numbers using an R backend
+- **Requirements**: R backend must be running on port 8080
+- **Usage**: Enter a comma-separated list of numbers to calculate statistics
+
+### 3. OpenAI Chat
+
+- **Frontend Route**: `/chat` (i.e `http://localhost:5173/chat`)
+- **Description**: Simple chat interface using OpenAI's API
+- **Requirements**: Valid OpenAI API key in the `.env` file
+- **Usage**: Type messages to chat with the AI assistant
+
+## Troubleshooting
+
+- **Python Backend Issues**: Check that FastAPI is running on port 8000 and CORS is properly configured
+- **R Backend Issues**: Ensure the Plumber API is running on port 8080 and can parse JSON requests
+- **OpenAI API Issues**: Verify your API key is correctly set in the `.env` file
 
 ## Project Structure
 
-The project consists of two main parts:
+├── frontend/ # React frontend application
+| |.env.example # Example environment variables
+│ ├── src/
+│ │ ├── services/ # API clients for backend communication
+│ │ └── pages/ # React components for each example
+├── backend/
+│ ├── python/ # Python FastAPI calculator backend
+│ └── R/ # R Plumber statistics backend
+└── README.md # Project documentation
 
-1. **R Plumber API Backend**: Processes data and performs statistical analysis
-2. **React/TypeScript Frontend**: Provides the user interface and visualization
 
-## Setup Instructions
-
-### 1. Set Up the R Backend
-
-#### Prerequisites
-- R installed on your system
-- Required R packages: plumber, dplyr, ggplot2, plotly, jsonlite, tibble
-
-#### Install R Dependencies
-Open R console and run:
-
-```r
-install.packages(c("plumber", "dplyr", "ggplot2", "plotly", "jsonlite", "tibble"))
-```
-
-#### Run the R Plumber API
-1. Save the `app.R` file to your system
-2. Navigate to the directory where you saved the file
-3. Start the R Plumber API:
-
-```r
-Rscript -e "library(plumber); pr <- plumb('app.R'); pr$run(host='0.0.0.0', port=8000)"
-```
-
-The `R` API will start on port 8000.
-
-### 2. Set Up the React Frontend
-
-#### Prerequisites
-- Node.js and npm installed on your system
-
-#### Installation
-
-```bash
-# Clone the repository or create a new project
-cd r-analytics-frontend
-
-# Install dependencies
-npm install
-```
-
-#### Running the Frontend
-
-```bash
-npm start
-```
-
-The React application will start on http://localhost:3000 and connect to the R Plumber API running on port 8000.
-
-## Using the Application
-
-1. Use the Data Generator to specify sample size, correlation strength, and noise level
-2. Click "Generate Data" to create a random dataset with the specified parameters
-3. Click "Analyze with R" to send the data to the R backend
-4. The R backend will:
-   - Calculate summary statistics
-   - Fit a linear model
-   - Generate plots (scatter plot with regression line, residual histogram, Q-Q plot)
-5. The frontend will display all results returned from R
-
-## Technology Stack
-
-### Frontend
-- React with TypeScript
-- Styled-components for styling
-- Plotly.js for visualizations
-- Axios for API requests
-
-### Backend
-- R programming language
-- Plumber for REST API
-- dplyr and other tidyverse packages for data manipulation
-- plotly for creating interactive visualizations
-
-## Extending the Application
-
-- Add more complex statistical models (multiple regression, ANOVA, etc.)
-- Integrate more advanced visualizations
-- Add file upload capabilities for custom datasets
-- Implement user authentication
-- Deploy to production with proper security measures
-
-## References
- - [SOCR](https://socr.umich.edu) and [SOCR HTML5 Webapps](https://socr.umich.edu/HTML5/)
- - [GrayRain](https://gray-rain.com)
 
