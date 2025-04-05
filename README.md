@@ -214,5 +214,7 @@ The project uses environment variables for configuration. An example file `.env.
 └── README.md # Project documentation
 ```
 
-
+## References
+ - [SOCR](https://socr.umich.edu) and [SOCR HTML5 Webapps](https://socr.umich.edu/HTML5/)
+ - [GrayRain](https://gray-rain.com)
 
