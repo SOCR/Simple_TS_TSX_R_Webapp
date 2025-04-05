@@ -51,10 +51,6 @@ You'll need Node.js (v14 or newer) and npm installed:
   ```
 
 #### Other Requirements
-
-- Python 3.8+ for the Python backend
-- R for the R backend
-- OpenAI API key for the chat example
 - Python 3.8+ for the Python backend
 - R for the R backend
 - OpenAI API key for the chat example
