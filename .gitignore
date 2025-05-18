@@ -112,3 +112,6 @@ vent/
 ENV/
 .R/*
 !.R/.gitkeep
+
+package.json
+package-lock.json

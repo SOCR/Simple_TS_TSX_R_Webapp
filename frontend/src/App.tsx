@@ -11,7 +11,9 @@ import NotFound from "./pages/auth/NotFound";
 import PyCalculatorPage from "./pages/Ex1_PyCalculator/PyCalculatorPage";
 import RStatsCalculatorPage from "./pages/Ex2_RStatsCalculator/RstatsCalculatorPage";
 import ChatPage from "./pages/Ex1_ChatPage/ChatPage";
-
+import UploadPage from "./pages/UploadPage.tsx";
+import ObfuscationPage from "./pages/ObfuscationPage.tsx";
+import DRECalculatorPage from "./pages/DRECalculatorPage";
 
 
 const App = () => (
@@ -34,6 +36,13 @@ const App = () => (
 
             {/* Example 3: Chat with AI */}
             <Route path="/chat" element={<ChatPage />} />
+
+            <Route path="/upload" element={<UploadPage />} />
+
+            <Route path="/obfuscation" element={<ObfuscationPage />} />
+
+            {/* DRE Calculator */}
+            <Route path="/dre" element={<DRECalculatorPage />} />
 
             {/* Protected routes */}
             {/* <Route

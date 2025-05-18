@@ -21,6 +21,7 @@
     "lucide-react": "^0.487.0",
     "next-themes": "^0.4.6",
     "openai": "^4.91.1",
+    "radix-ui": "^1.4.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.4.1",

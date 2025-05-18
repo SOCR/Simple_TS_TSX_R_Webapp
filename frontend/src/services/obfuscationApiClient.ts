@@ -22,7 +22,7 @@ export const rStatsApi = {
   // Check if the API is available
   checkStatus: async (): Promise<boolean> => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/calc`);
+      const response = await axios.get(`${API_BASE_URL}/`);
       return response.status === 200;
     } catch (error) {
       console.error('Failed to connect to R backend:', error);
@@ -35,7 +35,7 @@ export const rStatsApi = {
     try {
       // Instead of sending as query params, send as request body
       const response = await axios.post<StatsResponse>(
-        `${API_BASE_URL}/calc/stats`,
+        `${API_BASE_URL}/stats`,
         { numbers: numbers } // Send as JSON object in request body
       );
       return response.data;
